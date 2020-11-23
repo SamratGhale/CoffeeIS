@@ -58,6 +58,7 @@ public class Coffee{
     this.modelNumber = modelNumber;
     this.appName = appName;
     this.category = category;
+    this.recommendedBy = recommendedBy;
     this.price = price;
     this.discount = discount;
   }

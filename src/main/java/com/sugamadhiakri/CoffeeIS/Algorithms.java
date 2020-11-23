@@ -12,7 +12,9 @@ class Algorithms{
     a.adder(1, "himalayan coffee", "coffee beans", "matt D'Avella",5000,10);
     a.adder(2, "ilam coffee", "coffee beans", "kp oli",1000,20);
     a.adder(3, "african coffee", "grinded coffee ", "barak obama",10000,00);
+    a.importCsv();
     a.mergeSort();
+    a.exportCsv();
     a.printer();
   }
   public void mergeSort(){
@@ -24,20 +26,20 @@ class Algorithms{
   public void importCsv(){
     forCsv c = new forCsv(this.items);
     c.addFromCsv();
-    this.items = s.getItems();
+    this.items = c.items;
   }
 
   public void exportCsv(){
     forCsv c = new forCsv(this.items);
-    c.addFromCsv();
+    c.addIntoCsv();
   }
 
   public void adder(int modelNumber, String appName, String category,String recommendedBy, int price, int discount){
     this.items.add(new Coffee(modelNumber, appName, category, recommendedBy, price,discount));
   }
   public void printer(){ //print the pricess
-    for(Coffee i:this.items){
-      System.out.print(i.price+" ");
-    }
+      this.items.forEach(i -> {
+          System.out.print(i.price+" ");
+      });
   }
 }

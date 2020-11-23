@@ -20,7 +20,7 @@ public class forCsv{
     ArrayList <Coffee> items = new ArrayList<>();
     forCsv c = new forCsv(items);
     c.addFromCsv();
-    c.addIntoCsv();
+    //c.addIntoCsv();
     System.out.println(c.items);
   }
   public void addFromCsv(){
@@ -32,6 +32,8 @@ public class forCsv{
       }
       br.close();
     } catch (IOException e) {
+        //System.out.println("errorrrr");
+       
     }
   }
   public void addIntoCsv(){
@@ -40,9 +42,10 @@ public class forCsv{
         csvWriter.append(String.join(",",Integer.toString(c.getModelNumber()),c.getAppName(),c.getCategory(),c.getRecommendedBy(),Integer.toString(c.getPrice()),Integer.toString(c.getDiscount())));
         csvWriter.append('\n');
       }
-    csvWriter.flush();
+    //csvWriter.flush();
     csvWriter.close();
     }catch (IOException e) {
+        System.out.println("errorrrr");
     }
   }
 }
