@@ -1,8 +1,10 @@
+package com.sugamadhiakri.CoffeeIS;
 public class Coffee{
   int modelNumber;
   String appName;
   String category;
   String recommendedBy;
+  int discount;
   int price;
 
     public int getModelNumber() {
@@ -52,7 +54,6 @@ public class Coffee{
     public void setDiscount(int discount) {
         this.discount = discount;
     }
-  int discount;
   public Coffee(int modelNumber, String appName, String category,String recommendedBy, int price, int discount){
     this.modelNumber = modelNumber;
     this.appName = appName;
@@ -60,4 +61,5 @@ public class Coffee{
     this.price = price;
     this.discount = discount;
   }
+  
 }

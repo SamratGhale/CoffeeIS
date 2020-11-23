@@ -1,3 +1,4 @@
+package com.sugamadhiakri.CoffeeIS;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -9,8 +10,14 @@ public class forCsv{
   public forCsv(ArrayList <Coffee> items){
     this.items = items;
   }
+  public ArrayList<Coffee> getItems(){
+    return this.items;
+  }
+  public void setItems(ArrayList<Coffee> items) {
+    this.items = items;
+  }
   public static void main(String[] args){
-    ArrayList <Coffee> items = new ArrayList<Coffee>();
+    ArrayList <Coffee> items = new ArrayList<>();
     forCsv c = new forCsv(items);
     c.addFromCsv();
     c.addIntoCsv();
@@ -25,7 +32,6 @@ public class forCsv{
       }
       br.close();
     } catch (IOException e) {
-      e.printStackTrace();
     }
   }
   public void addIntoCsv(){
@@ -34,10 +40,9 @@ public class forCsv{
         csvWriter.append(String.join(",",Integer.toString(c.getModelNumber()),c.getAppName(),c.getCategory(),c.getRecommendedBy(),Integer.toString(c.getPrice()),Integer.toString(c.getDiscount())));
         csvWriter.append('\n');
       }
-    //csvWriter.flush();
+    csvWriter.flush();
     csvWriter.close();
     }catch (IOException e) {
-      e.printStackTrace();
     }
   }
 }

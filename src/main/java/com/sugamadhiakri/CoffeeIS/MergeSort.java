@@ -1,7 +1,8 @@
+package com.sugamadhiakri.CoffeeIS;
 import java.util.ArrayList;
  
 public class MergeSort {
-    private ArrayList<Coffee> inputArray;
+    private final ArrayList<Coffee> inputArray;
     public ArrayList<Coffee> getSortedArray() {
         return inputArray;
     }
