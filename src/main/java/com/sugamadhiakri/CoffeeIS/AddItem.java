@@ -118,7 +118,7 @@ public class AddItem extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Exit");
+        jButton2.setText("Cancel");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
