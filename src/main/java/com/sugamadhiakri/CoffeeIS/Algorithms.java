@@ -25,7 +25,7 @@ class Algorithms{
   
   public void importCsv(){
     forCsv c = new forCsv(this.items);
-    c.addFromCsv();
+    //c.addFromCsv();
     this.items = c.items;
   }
 

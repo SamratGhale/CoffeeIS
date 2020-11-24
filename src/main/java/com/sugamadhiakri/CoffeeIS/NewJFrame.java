@@ -17,21 +17,23 @@ public class NewJFrame extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-    public ArrayList<Coffee> items;
+    public static ArrayList<Coffee> items;
+    public int maxNum;
     public NewJFrame(ArrayList<Coffee> items) {
-        this.items = items;
+        NewJFrame.items = items;
+        this.maxNum=0;
         initComponents();
     }
     public void adder(int modelNumber, String appName, String category,String recommendedBy, int price, int discount){
-        this.items.add(new Coffee(modelNumber, appName, category, recommendedBy, price,discount));
+        NewJFrame.items.add(new Coffee(modelNumber, appName, category, recommendedBy, price,discount));
     }
-    public void refreshTable(){
+    public static void refreshTable(){
        DefaultTableModel model = new DefaultTableModel(0,0);
-       this.itemTable.setModel(model);
+       NewJFrame.itemTable.setModel(model);
        model.setColumnIdentifiers( new String [] {
                 "coffee number", "coffe namel", "category", "recommened by", "discount", "price"
             });
-        this.items.forEach(c -> {
+        NewJFrame.items.forEach((Coffee c) -> {
             int num = c.getModelNumber();
             String name = c.getAppName();
             String cat = c.getCategory();
@@ -44,19 +46,21 @@ public class NewJFrame extends javax.swing.JFrame {
          
     }
       public void mergeSort(){
-    MergeSort ms = new MergeSort(this.items); 
+    MergeSort ms = new MergeSort(NewJFrame.items); 
     ms.sortGivenArray();
-    this.items = ms.getSortedArray();
+    NewJFrame.items = ms.getSortedArray();
+    refreshTable();
   }
   
   public void importCsv(){
-    forCsv c = new forCsv(this.items);
-    c.addFromCsv();
-    this.items = c.items;
+    forCsv c = new forCsv(NewJFrame.items);
+    this.maxNum=c.addFromCsv(this.maxNum);
+    NewJFrame.items = c.items;
+    refreshTable();
   }
 
   public void exportCsv(){
-    forCsv c = new forCsv(this.items);
+    forCsv c = new forCsv(NewJFrame.items);
     c.addIntoCsv();
   }
 
@@ -70,6 +74,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuItem1 = new javax.swing.JMenuItem();
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         itemTable = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
@@ -82,10 +87,22 @@ public class NewJFrame extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Coffie Inventory System");
@@ -187,6 +204,15 @@ public class NewJFrame extends javax.swing.JFrame {
         );
 
         jMenu1.setText("File");
+
+        jMenuItem2.setText("Import csv");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Edit");
@@ -217,7 +243,9 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        new AddItem().setVisible(true);
+        AddItem a = new AddItem(NewJFrame.items);
+        a.setVisible(true);
+        NewJFrame.items = a.items;
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -239,6 +267,11 @@ public class NewJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         mergeSort();
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        importCsv();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -269,21 +302,22 @@ public class NewJFrame extends javax.swing.JFrame {
 
         /* Create and display the form */
         
+        
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 ArrayList<Coffee> items = new ArrayList<>();
                 NewJFrame a = new NewJFrame(items);
-                a.adder(1, "himalayan coffee", "coffee beans", "matt D'Avella",5000,10);
-                a.adder(2, "ilam coffee", "coffee beans", "kp oli",1000,20);
-                a.adder(3, "african coffee", "grinded coffee ", "barak obama",10000,00);
+                //a.adder(1, "himalayan coffee", "coffee beans", "matt D'Avella",5000,10);
+                //a.adder(2, "ilam coffee", "coffee beans", "kp oli",1000,20);
+                //a.adder(3, "african coffee", "grinded coffee ", "barak obama",10000,00);
                 a.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JTable itemTable;
+    public static javax.swing.JTable itemTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -295,6 +329,8 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
