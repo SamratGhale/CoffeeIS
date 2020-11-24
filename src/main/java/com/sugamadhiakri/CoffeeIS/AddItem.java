@@ -5,7 +5,9 @@
  */
 package com.sugamadhiakri.CoffeeIS;
 
+import java.awt.Container;
 import java.util.ArrayList;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
  *
@@ -21,6 +23,14 @@ public class AddItem extends javax.swing.JFrame {
     public AddItem(ArrayList<Coffee> items) {
         initComponents();
         this.items = items;
+    }
+
+    public void clearAll() {
+        numField.setText("");
+        nameField.setText("");
+        recField.setText("");
+        disField.setText("");
+        priceField.setText("");
     }
 
     /**
@@ -50,6 +60,7 @@ public class AddItem extends javax.swing.JFrame {
         warn2 = new javax.swing.JLabel();
         warn3 = new javax.swing.JLabel();
         catCombo = new javax.swing.JComboBox<>();
+        clearBtn = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jLabel1.setText("Add Item");
@@ -108,6 +119,11 @@ public class AddItem extends javax.swing.JFrame {
         });
 
         jButton2.setText("Exit");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         warn1.setForeground(new java.awt.Color(255, 0, 51));
 
@@ -119,6 +135,13 @@ public class AddItem extends javax.swing.JFrame {
         catCombo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 catComboActionPerformed(evt);
+            }
+        });
+
+        clearBtn.setText("Clear");
+        clearBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearBtnActionPerformed(evt);
             }
         });
 
@@ -140,29 +163,26 @@ public class AddItem extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(warn1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(catCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1)
-                            .addComponent(numField, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(catCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(nameField, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
+                            .addComponent(numField, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(50, 50, 50)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel5)
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
-                                    .addComponent(jLabel7))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(priceField, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(recField, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(disField, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(warn3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(warn2, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(jButton2)))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel7)
+                                .addComponent(jLabel6))
+                            .addComponent(clearBtn))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(priceField, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(recField, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(disField, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(warn3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(warn2, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2))))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -185,7 +205,7 @@ public class AddItem extends javax.swing.JFrame {
                     .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(disField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addComponent(warn2, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,11 +219,12 @@ public class AddItem extends javax.swing.JFrame {
                             .addComponent(catCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4)
                             .addComponent(priceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
+                            .addComponent(jLabel6))
                         .addGap(72, 72, 72)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1)
-                            .addComponent(jButton2))
+                            .addComponent(jButton2)
+                            .addComponent(clearBtn))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -212,15 +233,24 @@ public class AddItem extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int num = Integer.parseInt(numField.getText());
-        String  name = nameField.getText();
-        String category = catCombo.getSelectedItem().toString();
-        String reco = recField.getText();
-        int dis = Integer.parseInt(disField.getText());
-        int price = Integer.parseInt(priceField.getText());
-        this.items.add(new Coffee(num, name, category, reco, dis, price));
-        NewJFrame.items = this.items;
-        NewJFrame.refreshTable();
+        try {
+            int num = Integer.parseInt(numField.getText());
+            String name = nameField.getText();
+            String category = catCombo.getSelectedItem().toString();
+            String reco = recField.getText();
+            int dis = Integer.parseInt(disField.getText());
+            int price = Integer.parseInt(priceField.getText());
+            this.items.add(new Coffee(num, name, category, reco, dis, price));
+
+        } catch (Exception e) {
+            showMessageDialog(null, "Please fill all the fileds");
+        } finally {
+            NewJFrame.items = this.items;
+            NewJFrame.refreshTable();
+            clearAll();
+            showMessageDialog(null, "Item has been added");
+
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void recFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_recFieldActionPerformed
@@ -272,6 +302,16 @@ public class AddItem extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_priceFieldKeyTyped
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
+        // TODO add your handling code here:
+        clearAll();
+    }//GEN-LAST:event_clearBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -307,6 +347,7 @@ public class AddItem extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> catCombo;
+    private javax.swing.JButton clearBtn;
     private javax.swing.JTextField disField;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

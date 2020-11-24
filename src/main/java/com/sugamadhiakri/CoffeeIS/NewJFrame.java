@@ -7,10 +7,11 @@ package com.sugamadhiakri.CoffeeIS;
 
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
  *
- * @author sugam 
+ * @author sugam
  */
 public class NewJFrame extends javax.swing.JFrame {
 
@@ -19,20 +20,23 @@ public class NewJFrame extends javax.swing.JFrame {
      */
     public static ArrayList<Coffee> items;
     public int maxNum;
+
     public NewJFrame(ArrayList<Coffee> items) {
         NewJFrame.items = items;
-        this.maxNum=0;
+        this.maxNum = 0;
         initComponents();
     }
-    public void adder(int modelNumber, String appName, String category,String recommendedBy, int price, int discount){
-        NewJFrame.items.add(new Coffee(modelNumber, appName, category, recommendedBy, price,discount));
+
+    public void adder(int modelNumber, String appName, String category, String recommendedBy, int price, int discount) {
+        NewJFrame.items.add(new Coffee(modelNumber, appName, category, recommendedBy, price, discount));
     }
-    public static void refreshTable(){
-       DefaultTableModel model = new DefaultTableModel(0,0);
-       NewJFrame.itemTable.setModel(model);
-       model.setColumnIdentifiers( new String [] {
-                "coffee number", "coffe namel", "category", "recommened by", "discount", "price"
-            });
+
+    public static void refreshTable() {
+        DefaultTableModel model = new DefaultTableModel(0, 0);
+        NewJFrame.itemTable.setModel(model);
+        model.setColumnIdentifiers(new String[]{
+            "coffee number", "coffe name", "category", "recommened by", "discount", "price"
+        });
         NewJFrame.items.forEach((Coffee c) -> {
             int num = c.getModelNumber();
             String name = c.getAppName();
@@ -43,26 +47,27 @@ public class NewJFrame extends javax.swing.JFrame {
             Object[] data = {num, name, cat, rec, dis, price};
             model.addRow(data);
         });
-         
-    }
-      public void mergeSort(){
-    MergeSort ms = new MergeSort(NewJFrame.items); 
-    ms.sortGivenArray();
-    NewJFrame.items = ms.getSortedArray();
-    refreshTable();
-  }
-  
-  public void importCsv(){
-    forCsv c = new forCsv(NewJFrame.items);
-    this.maxNum=c.addFromCsv(this.maxNum);
-    NewJFrame.items = c.items;
-    refreshTable();
-  }
 
-  public void exportCsv(){
-    forCsv c = new forCsv(NewJFrame.items);
-    c.addIntoCsv();
-  }
+    }
+
+    public void mergeSort() {
+        MergeSort ms = new MergeSort(NewJFrame.items);
+        ms.sortGivenArray();
+        NewJFrame.items = ms.getSortedArray();
+        refreshTable();
+    }
+
+    public void importCsv() {
+        forCsv c = new forCsv(NewJFrame.items);
+        this.maxNum = c.addFromCsv(this.maxNum);
+        NewJFrame.items = c.items;
+        refreshTable();
+    }
+
+    public void exportCsv() {
+        forCsv c = new forCsv(NewJFrame.items);
+        c.addIntoCsv();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -79,15 +84,17 @@ public class NewJFrame extends javax.swing.JFrame {
         itemTable = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        warn1 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        searchPrice = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        exports = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
 
@@ -112,7 +119,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "coffee number", "coffe namel", "category", "recommened by", "discount", "price"
+                "coffee number", "coffee name", "category", "recommened by", "discount", "price"
             }
         ));
         itemTable.setName(""); // NOI18N
@@ -127,21 +134,10 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setBorder(javax.swing.BorderFactory.createTitledBorder("Search by Price"));
-
-        jButton2.setText("Search");
-
-        jButton3.setText("Import");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setText("Search By Price");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        jButton4.setText("Export");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -159,51 +155,70 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
+        warn1.setForeground(new java.awt.Color(255, 0, 0));
+
+        jButton3.setText("Exit");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        searchPrice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchPriceActionPerformed(evt);
+            }
+        });
+        searchPrice.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                searchPriceKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(warn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton5))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+                            .addComponent(searchPrice))
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
-                .addGap(35, 35, 35))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(18, 18, 18)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(66, 66, 66))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton6))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButton5))
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(searchPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(warn1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton5)
+                    .addComponent(jButton6)
+                    .addComponent(jButton3))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
-        jMenu1.setText("File");
+        jLabel1.setFont(new java.awt.Font("Ubuntu", 1, 26)); // NOI18N
+        jLabel1.setText("Coffee House Inventory ");
+
+        exports.setText("File");
 
         jMenuItem2.setText("Import csv");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -211,9 +226,17 @@ public class NewJFrame extends javax.swing.JFrame {
                 jMenuItem2ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        exports.add(jMenuItem2);
 
-        jMenuBar1.add(jMenu1);
+        jMenuItem3.setText("Export to csv");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        exports.add(jMenuItem3);
+
+        jMenuBar1.add(exports);
 
         jMenu2.setText("Edit");
         jMenuBar1.add(jMenu2);
@@ -227,14 +250,20 @@ public class NewJFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 754, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(156, 156, 156)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -248,30 +277,70 @@ public class NewJFrame extends javax.swing.JFrame {
         NewJFrame.items = a.items;
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        exportCsv();
-    }//GEN-LAST:event_jButton4ActionPerformed
-
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         refreshTable();
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        importCsv();
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         mergeSort();
+        showMessageDialog(null, "Sorted accourding to the prices");
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
         importCsv();
+        showMessageDialog(null, "Imported item.csv");
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        mergeSort();
+        try{
+            int p = Integer.parseInt(searchPrice.getText());
+            BinarySearch a= new BinarySearch();
+            int ret = a.binarySearch(NewJFrame.items,p);
+            if (ret == -1){
+                showMessageDialog(null, "sorry there is no coffee with price:"+p);
+            }
+            else{
+                Coffee coff = NewJFrame.items.get(ret);
+                showMessageDialog(null, "\nItem number: "+coff.getModelNumber()+"\nCoffee name: "+coff.getAppName()+"\ntype: "+coff.getCategory()+"\n recommende by: "+coff.getRecommendedBy()+"\nprice: "+coff.getPrice()+"\ndiscount: "+coff.getDiscount());
+            }
+        }
+        catch(NumberFormatException e){
+            showMessageDialog(null, "Price is empty");
+        }
+       
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        exportCsv();
+        showMessageDialog(null, "Exported to items.csv");
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void searchPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchPriceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchPriceActionPerformed
+
+    private void searchPriceKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchPriceKeyTyped
+        // TODO add your handling code here:
+                if ((evt.getKeyChar() >= '0' && evt.getKeyChar() <= '9') || evt.getKeyChar() == '\b') {
+       
+        searchPrice.setEditable(true);
+            warn1.setText("");
+        } else {
+            searchPrice.setEditable(false);
+            warn1.setText("Enter only numeric digits");
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_searchPriceKeyTyped
 
     /**
      * @param args the command line arguments
@@ -301,9 +370,6 @@ public class NewJFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        
-        
-
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 ArrayList<Coffee> items = new ArrayList<>();
@@ -317,22 +383,24 @@ public class NewJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu exports;
     public static javax.swing.JTable itemTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JMenu jMenu1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField searchPrice;
+    private javax.swing.JLabel warn1;
     // End of variables declaration//GEN-END:variables
 }

@@ -35,8 +35,7 @@ public class forCsv{
         }
         else{
             System.out.println("item exists");
-        }
-        
+        }       
       }
       br.close();
     } catch (Exception e) {
