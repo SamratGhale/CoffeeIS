@@ -19,11 +19,11 @@ public class NewJFrame extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
     public static ArrayList<Coffee> items;
-    public int maxNum;
+    
 
     public NewJFrame(ArrayList<Coffee> items) {
         NewJFrame.items = items;
-        this.maxNum = 0;
+      
         initComponents();
     }
 
@@ -68,7 +68,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
     public void importCsv() {
         forCsv c = new forCsv(NewJFrame.items);
-        this.maxNum = c.addFromCsv(this.maxNum);
+        c.addFromCsv();
         NewJFrame.items = c.items;
         refreshTable();
     }
@@ -99,6 +99,8 @@ public class NewJFrame extends javax.swing.JFrame {
         warn1 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         searchPrice = new javax.swing.JTextField();
+        searchTypeBox = new javax.swing.JComboBox<>();
+        searchTypes = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         exports = new javax.swing.JMenu();
@@ -192,6 +194,20 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
+        searchTypeBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Latte", "Cappuccino", "Americano", "Espresso" }));
+        searchTypeBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchTypeBoxActionPerformed(evt);
+            }
+        });
+
+        searchTypes.setText("Search By Type");
+        searchTypes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchTypesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -209,10 +225,18 @@ public class NewJFrame extends javax.swing.JFrame {
                             .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(18, 18, 18)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addGap(66, 66, 66))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(searchTypeBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(searchTypes, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3)
+                        .addGap(15, 15, 15))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,7 +244,9 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(searchPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(searchPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchTypeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchTypes))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(warn1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -273,10 +299,11 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -364,6 +391,22 @@ public class NewJFrame extends javax.swing.JFrame {
         }        // TODO add your handling code here:
     }//GEN-LAST:event_searchPriceKeyTyped
 
+    private void searchTypeBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTypeBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchTypeBoxActionPerformed
+
+    private void searchTypesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTypesActionPerformed
+        // TODO add your handling code here:
+        String type = searchTypeBox.getSelectedItem().toString();
+        ArrayList<Coffee> get = SearchByType.searchByType(NewJFrame.items, type);
+        ArrayList<String> arr= new ArrayList<>();
+        for (Coffee g:get){
+            arr.add(g.getAppName()+" ");
+        }
+        String ar = arr.toString();
+        showMessageDialog(null, "There are "+get.size()+" items of type: "+ type+ ": " +ar);
+    }//GEN-LAST:event_searchTypesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -392,15 +435,13 @@ public class NewJFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                ArrayList<Coffee> items = new ArrayList<>();
-                NewJFrame a = new NewJFrame(items);
-                //a.adder(1, "himalayan coffee", "coffee beans", "matt D'Avella",5000,10);
-                //a.adder(2, "ilam coffee", "coffee beans", "kp oli",1000,20);
-                //a.adder(3, "african coffee", "grinded coffee ", "barak obama",10000,00);
-                a.setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            ArrayList<Coffee> items1 = new ArrayList<>();
+            NewJFrame a = new NewJFrame(items1);
+            //a.adder(1, "himalayan coffee", "coffee beans", "matt D'Avella",5000,10);
+            //a.adder(2, "ilam coffee", "coffee beans", "kp oli",1000,20);
+            //a.adder(3, "african coffee", "grinded coffee ", "barak obama",10000,00);
+            a.setVisible(true);
         });
     }
 
@@ -423,6 +464,8 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField searchPrice;
+    private javax.swing.JComboBox<String> searchTypeBox;
+    private javax.swing.JButton searchTypes;
     private javax.swing.JLabel warn1;
     // End of variables declaration//GEN-END:variables
 }

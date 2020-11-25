@@ -22,7 +22,7 @@ public class MergeSort {
     }   
     
     public void merger(int startIndex,int midIndex,int endIndex){
-        ArrayList<Coffee> mergedSortedArray = new ArrayList<Coffee>();
+        ArrayList<Coffee> mergedSortedArray = new ArrayList<>();
         int leftIndex = startIndex;
         int rightIndex = midIndex+1;
         
