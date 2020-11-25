@@ -6,6 +6,15 @@ public class Coffee{
   String recommendedBy;
   int discount;
   int price;
+  boolean addedSugar;
+
+    public boolean isAddedSugar() {
+        return addedSugar;
+    }
+
+    public void setAddedSugar(boolean addedSugar) {
+        this.addedSugar = addedSugar;
+    }
 
     public int getModelNumber() {
         return modelNumber;
@@ -54,13 +63,14 @@ public class Coffee{
     public void setDiscount(int discount) {
         this.discount = discount;
     }
-  public Coffee(int modelNumber, String appName, String category,String recommendedBy, int price, int discount){
+  public Coffee(int modelNumber, String appName, String category,String recommendedBy, int price, int discount,boolean sugar){
     this.modelNumber = modelNumber;
     this.appName = appName;
     this.category = category;
     this.recommendedBy = recommendedBy;
     this.price = price;
     this.discount = discount;
+    this.addedSugar = sugar;
   }
   
 }

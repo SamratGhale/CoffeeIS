@@ -7,6 +7,7 @@ package com.sugamadhiakri.CoffeeIS;
 
 import java.awt.Container;
 import java.util.ArrayList;
+import javax.swing.ButtonModel;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
@@ -44,6 +45,7 @@ public class AddItem extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        sugarC = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         numField = new javax.swing.JTextField();
@@ -63,6 +65,9 @@ public class AddItem extends javax.swing.JFrame {
         warn3 = new javax.swing.JLabel();
         catCombo = new javax.swing.JComboBox<>();
         clearBtn = new javax.swing.JButton();
+        yesb = new javax.swing.JRadioButton();
+        nob = new javax.swing.JRadioButton();
+        addedSugar = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         jLabel1.setText("Add Item");
@@ -147,6 +152,20 @@ public class AddItem extends javax.swing.JFrame {
             }
         });
 
+        sugarC.add(yesb);
+        yesb.setText("YES");
+
+        sugarC.add(nob);
+        nob.setSelected(true);
+        nob.setText("NO");
+        nob.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nobActionPerformed(evt);
+            }
+        });
+
+        addedSugar.setText("Added sugar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -156,12 +175,18 @@ public class AddItem extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4))
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4))
+                        .addGap(23, 23, 23))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(addedSugar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(warn1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -179,13 +204,16 @@ public class AddItem extends javax.swing.JFrame {
                             .addComponent(clearBtn))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(priceField, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(recField, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(disField, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(warn3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(warn2, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2))))
-                .addContainerGap(36, Short.MAX_VALUE))
+                            .addComponent(jButton2)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(priceField, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(warn3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(nob)
+                    .addComponent(yesb))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,24 +238,29 @@ public class AddItem extends javax.swing.JFrame {
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addComponent(warn2, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(catCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(priceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(warn3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                        .addComponent(warn3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(123, 123, 123))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(catCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addComponent(priceField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addGap(72, 72, 72)
+                        .addGap(15, 15, 15)
+                        .addComponent(addedSugar)
+                        .addGap(48, 48, 48)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1)
                             .addComponent(jButton2)
-                            .addComponent(clearBtn))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(clearBtn)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(yesb)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nob)))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
@@ -242,6 +275,16 @@ public class AddItem extends javax.swing.JFrame {
             String reco = recField.getText();
             int dis = Integer.parseInt(disField.getText());
             int price = Integer.parseInt(priceField.getText());
+            boolean sugar = false;
+            if (yesb.isSelected()){
+              sugar =  true;   
+            }
+            else if (nob.isSelected()){
+                 sugar = false; 
+            }
+            
+            //sugar.getClass();
+            
             for (Coffee c:this.items){
                 if (c.getModelNumber() == num){
                     showMessageDialog(null, "The coffee number has already been used");
@@ -249,18 +292,17 @@ public class AddItem extends javax.swing.JFrame {
                 }
             }
             if (this.uniq == true){
-                this.items.add(new Coffee(num, name, category, reco, dis, price));
+                this.items.add(new Coffee(num, name, category, reco, dis, price,sugar));
             }
-
-        } catch (Exception e) {
-            showMessageDialog(null, "Please fill all the fileds");
-        } finally {
             NewJFrame.items = this.items;
             NewJFrame.refreshTable();
             if (this.uniq == true){
                 clearAll();
                 showMessageDialog(null, "Item has been added");
             }
+
+        } catch (Exception e) {
+            showMessageDialog(null, "Please fill all the fileds");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -323,6 +365,10 @@ public class AddItem extends javax.swing.JFrame {
         clearAll();
     }//GEN-LAST:event_clearBtnActionPerformed
 
+    private void nobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nobActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nobActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -357,6 +403,7 @@ public class AddItem extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel addedSugar;
     private javax.swing.JComboBox<String> catCombo;
     private javax.swing.JButton clearBtn;
     private javax.swing.JTextField disField;
@@ -370,11 +417,14 @@ public class AddItem extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField nameField;
+    private javax.swing.JRadioButton nob;
     private javax.swing.JTextField numField;
     private javax.swing.JTextField priceField;
     private javax.swing.JTextField recField;
+    private javax.swing.ButtonGroup sugarC;
     private javax.swing.JLabel warn1;
     private javax.swing.JLabel warn2;
     private javax.swing.JLabel warn3;
+    private javax.swing.JRadioButton yesb;
     // End of variables declaration//GEN-END:variables
 }

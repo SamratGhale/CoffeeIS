@@ -11,7 +11,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
  *
- * @author sugam
+ * @author sugam, samrat
  */
 public class NewJFrame extends javax.swing.JFrame {
 
@@ -27,15 +27,15 @@ public class NewJFrame extends javax.swing.JFrame {
         initComponents();
     }
 
-    public void adder(int modelNumber, String appName, String category, String recommendedBy, int price, int discount) {
-        NewJFrame.items.add(new Coffee(modelNumber, appName, category, recommendedBy, price, discount));
+    public void adder(int modelNumber, String appName, String category, String recommendedBy, int price, int discount,boolean sugar) {
+        NewJFrame.items.add(new Coffee(modelNumber, appName, category, recommendedBy, price, discount,sugar));
     }
 
     public static void refreshTable() {
         DefaultTableModel model = new DefaultTableModel(0, 0);
         NewJFrame.itemTable.setModel(model);
         model.setColumnIdentifiers(new String[]{
-            "coffee number", "coffe name", "category", "recommened by", "discount", "price"
+            "coffee number", "coffe name", "category", "recommened by", "discount", "price","added sugar"
         });
         NewJFrame.itemTable.setEnabled(false);
         NewJFrame.items.forEach((Coffee c) -> {
@@ -45,7 +45,15 @@ public class NewJFrame extends javax.swing.JFrame {
             String rec = c.getRecommendedBy();
             int dis = c.getDiscount();
             int price = c.getPrice();
-            Object[] data = {num, name, cat, rec, dis, price};
+            boolean s = c.isAddedSugar();
+            String sugar;
+            if (s){
+                sugar = "yes";
+            }
+            else{
+                sugar = "no";
+            }
+            Object[] data = {num, name, cat, rec, dis, price,sugar};
             model.addRow(data);
         });
 
@@ -120,11 +128,11 @@ public class NewJFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "coffee number", "coffee name", "category", "recommened by", "discount", "price"
+                "coffee number", "coffee name", "category", "recommened by", "discount", "price", "sugar"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
