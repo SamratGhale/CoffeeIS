@@ -37,6 +37,7 @@ public class NewJFrame extends javax.swing.JFrame {
         model.setColumnIdentifiers(new String[]{
             "coffee number", "coffe name", "category", "recommened by", "discount", "price"
         });
+        NewJFrame.itemTable.setEnabled(false);
         NewJFrame.items.forEach((Coffee c) -> {
             int num = c.getModelNumber();
             String name = c.getAppName();
@@ -121,7 +122,15 @@ public class NewJFrame extends javax.swing.JFrame {
             new String [] {
                 "coffee number", "coffee name", "category", "recommened by", "discount", "price"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         itemTable.setName(""); // NOI18N
         jScrollPane2.setViewportView(itemTable);
 

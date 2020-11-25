@@ -28,14 +28,11 @@ public class forCsv{
     try(BufferedReader br = new BufferedReader(new FileReader("items.csv"))){
       while((line = br.readLine()) != null){
         String[] item= line.split(",");    
-        if (maxNum < Integer.parseInt(item[0])){
+     
             //System.out.println(maxNum+" "+ Integer.parseInt(item[0]));
               this.items.add(new Coffee(Integer.parseInt(item[0]),item[1],item[2],item[3],Integer.parseInt(item[4]),Integer.parseInt(item[5])));
               maxNum = Integer.parseInt(item[0]);
-        }
-        else{
-            System.out.println("item exists");
-        }       
+           
       }
       br.close();
     } catch (Exception e) {
