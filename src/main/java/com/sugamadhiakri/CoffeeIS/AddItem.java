@@ -19,10 +19,12 @@ public class AddItem extends javax.swing.JFrame {
      * Creates new form AddItem
      */
     public ArrayList<Coffee> items;
+    boolean uniq;
 
     public AddItem(ArrayList<Coffee> items) {
         initComponents();
         this.items = items;
+        this.uniq = true;
     }
 
     public void clearAll() {
@@ -240,16 +242,25 @@ public class AddItem extends javax.swing.JFrame {
             String reco = recField.getText();
             int dis = Integer.parseInt(disField.getText());
             int price = Integer.parseInt(priceField.getText());
-            this.items.add(new Coffee(num, name, category, reco, dis, price));
+            for (Coffee c:this.items){
+                if (c.getModelNumber() == num){
+                    showMessageDialog(null, "The coffee number has already been used");
+                    this.uniq = false;
+                }
+            }
+            if (this.uniq == true){
+                this.items.add(new Coffee(num, name, category, reco, dis, price));
+            }
 
         } catch (Exception e) {
             showMessageDialog(null, "Please fill all the fileds");
         } finally {
             NewJFrame.items = this.items;
             NewJFrame.refreshTable();
-            clearAll();
-            showMessageDialog(null, "Item has been added");
-
+            if (this.uniq == true){
+                clearAll();
+                showMessageDialog(null, "Item has been added");
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
