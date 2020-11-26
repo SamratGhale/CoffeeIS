@@ -273,6 +273,7 @@ public class AddItem extends javax.swing.JFrame {
             String reco = recField.getText();
             int dis = Integer.parseInt(disField.getText());
             int price = Integer.parseInt(priceField.getText());
+            boolean uniq1 = true;
             boolean sugar = false;
             if (yesb.isSelected()){
               sugar =  true;   
@@ -286,15 +287,15 @@ public class AddItem extends javax.swing.JFrame {
             for (Coffee c:this.items){
                 if (c.getModelNumber() == num){
                     showMessageDialog(null, "The coffee number has already been used");
-                    this.uniq = false;
+                    uniq = false;
                 }
             }
-            if (this.uniq == true){
+            if (uniq == true){
                 this.items.add(new Coffee(num, name, category, reco, dis, price,sugar));
             }
             NewJFrame.items = this.items;
             NewJFrame.refreshTable();
-            if (this.uniq == true){
+            if (uniq == true){
                 clearAll();
                 showMessageDialog(null, "Item has been added");
             }

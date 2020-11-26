@@ -13,8 +13,8 @@ import java.util.ArrayList;
  * @author samrat
  */
 public class BinarySearch{
-  ArrayList<Coffee> items;
-  public int binarySearch(ArrayList<Coffee> items, int search){
+    
+  public static int binarySearch(ArrayList<Coffee> items, int search){
     int first = 0;
     int last = items.size() -1 ;
     int mid;

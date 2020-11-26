@@ -15,6 +15,9 @@ public class Coffee{
     public void setAddedSugar(boolean addedSugar) {
         this.addedSugar = addedSugar;
     }
+    public boolean getAddedSugar() {
+        return this.addedSugar;
+    }
 
     public int getModelNumber() {
         return modelNumber;

@@ -58,26 +58,6 @@ public class NewJFrame extends javax.swing.JFrame {
         });
 
     }
-
-    public void mergeSort() {
-        MergeSort ms = new MergeSort(NewJFrame.items);
-        ms.sortGivenArray();
-        NewJFrame.items = ms.getSortedArray();
-        refreshTable();
-    }
-
-    public void importCsv() {
-        forCsv c = new forCsv(NewJFrame.items);
-        c.addFromCsv();
-        NewJFrame.items = c.items;
-        refreshTable();
-    }
-
-    public void exportCsv() {
-        forCsv c = new forCsv(NewJFrame.items);
-        c.addIntoCsv();
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -294,16 +274,20 @@ public class NewJFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(169, 169, 169)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(169, 169, 169)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 736, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -333,23 +317,24 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        mergeSort();
+        MergeSort.sortMyArray();
+        refreshTable();
         showMessageDialog(null, "Sorted accourding to the prices");
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
-        importCsv();
+        forCsv.addFromCsv();
+        refreshTable();
         showMessageDialog(null, "Imported item.csv");
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        mergeSort();
+        MergeSort.sortMyArray();
         try{
             int p = Integer.parseInt(searchPrice.getText());
-            BinarySearch a= new BinarySearch();
-            int ret = a.binarySearch(NewJFrame.items,p);
+            int ret = BinarySearch.binarySearch(NewJFrame.items,p);
             if (ret == -1){
                 showMessageDialog(null, "sorry there is no coffee with price:"+p);
             }
@@ -366,7 +351,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        exportCsv();
+        forCsv.addIntoCsv();
         showMessageDialog(null, "Exported to items.csv");
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 

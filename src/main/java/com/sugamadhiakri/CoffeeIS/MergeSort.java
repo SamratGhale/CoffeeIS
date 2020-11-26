@@ -2,17 +2,10 @@ package com.sugamadhiakri.CoffeeIS;
 import java.util.ArrayList;
  
 public class MergeSort {
-    private final ArrayList<Coffee> inputArray;
-    public ArrayList<Coffee> getSortedArray() {
-        return inputArray;
+    public static void sortMyArray(){       
+        divide(0, NewJFrame.items.size()-1);
     }
-    public MergeSort(ArrayList<Coffee> inputArray){
-        this.inputArray = inputArray;
-    }
-    public void sortGivenArray(){       
-        divide(0, this.inputArray.size()-1);
-    }
-    public void divide(int startIndex,int endIndex){
+    public static void divide(int startIndex,int endIndex){
         if(startIndex<endIndex && (endIndex-startIndex)>=1){
             int mid = (endIndex + startIndex)/2;
             divide(startIndex, mid);
@@ -20,35 +13,32 @@ public class MergeSort {
             merger(startIndex,mid,endIndex);            
         }       
     }   
-    
-    public void merger(int startIndex,int midIndex,int endIndex){
+    public static void  merger(int startIndex,int midIndex,int endIndex){
         ArrayList<Coffee> mergedSortedArray = new ArrayList<>();
         int leftIndex = startIndex;
         int rightIndex = midIndex+1;
         
         while(leftIndex<=midIndex && rightIndex<=endIndex){
-            if(inputArray.get(leftIndex).price<=inputArray.get(rightIndex).price){
-                mergedSortedArray.add(inputArray.get(leftIndex));
+            if(NewJFrame.items.get(leftIndex).getPrice()<=NewJFrame.items.get(rightIndex).getPrice()){
+                mergedSortedArray.add(NewJFrame.items.get(leftIndex));
                 leftIndex++;
             }else{
-                mergedSortedArray.add(inputArray.get(rightIndex));
+                mergedSortedArray.add(NewJFrame.items.get(rightIndex));
                 rightIndex++;
             }
         }       
         while(leftIndex<=midIndex){
-            mergedSortedArray.add(inputArray.get(leftIndex));
+            mergedSortedArray.add(NewJFrame.items.get(leftIndex));
             leftIndex++;
-        }
-        
+        }    
         while(rightIndex<=endIndex){
-            mergedSortedArray.add(inputArray.get(rightIndex));
+            mergedSortedArray.add(NewJFrame.items.get(rightIndex));
             rightIndex++;
-        }
-        
+        }  
         int i = 0;
         int j = startIndex;
         while(i<mergedSortedArray.size()){
-            inputArray.set(j, mergedSortedArray.get(i++));
+            NewJFrame.items.set(j, mergedSortedArray.get(i++));
             j++;
         }
     }
