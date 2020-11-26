@@ -13,12 +13,18 @@ public class forCsv {
             while ((line = br.readLine()) != null) {
                 String[] item = line.split(",");
                 int Cn =Integer.parseInt(item[0]);
-                for (Coffee c:NewJFrame.items){
+                try{
+                    for (Coffee c:CoffeeInventorySystem.items){
                     if (Cn==c.getModelNumber()){
                         Cn =Cn+1;
                     }
                 }
-                NewJFrame.items.add(new Coffee(Cn, item[1],item[2],item[3], Integer.parseInt(item[4]), Integer.parseInt(item[5]), Boolean.parseBoolean(item[6])));  
+                }
+                catch(Exception e){
+                    
+                }
+                
+                CoffeeInventorySystem.items.add(new Coffee(Cn, item[1],item[2],item[3], Integer.parseInt(item[4]), Integer.parseInt(item[5]), Boolean.parseBoolean(item[6])));  
             }
             br.close();
         } 
@@ -30,7 +36,7 @@ public class forCsv {
     public static void addIntoCsv() {
         new File("items.csv").delete();
         try (FileWriter csvWriter = new FileWriter("items.csv")) {
-            for (Coffee c : NewJFrame.items) {
+            for (Coffee c : CoffeeInventorySystem.items) {
                 csvWriter.append(String.join(",", Integer.toString(c.getModelNumber()), c.getAppName(), c.getCategory(), c.getRecommendedBy(), Integer.toString(c.getPrice()), Integer.toString(c.getDiscount()),Boolean.toString(c.getAddedSugar())));
                 csvWriter.append('\n');
             }

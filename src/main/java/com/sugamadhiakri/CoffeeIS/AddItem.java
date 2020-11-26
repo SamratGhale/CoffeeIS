@@ -18,12 +18,9 @@ public class AddItem extends javax.swing.JFrame {
      * Creates new form AddItem
      */
     public ArrayList<Coffee> items;
-    boolean uniq;
-
     public AddItem(ArrayList<Coffee> items) {
         initComponents();
         this.items = items;
-        this.uniq = true;
     }
 
     public void clearAll() {
@@ -287,15 +284,15 @@ public class AddItem extends javax.swing.JFrame {
             for (Coffee c:this.items){
                 if (c.getModelNumber() == num){
                     showMessageDialog(null, "The coffee number has already been used");
-                    uniq = false;
+                    uniq1 = false;
                 }
             }
-            if (uniq == true){
+            if (uniq1 == true){
                 this.items.add(new Coffee(num, name, category, reco, dis, price,sugar));
             }
-            NewJFrame.items = this.items;
-            NewJFrame.refreshTable();
-            if (uniq == true){
+            CoffeeInventorySystem.items = this.items;
+            CoffeeInventorySystem.refreshTable();
+            if (uniq1 == true){
                 clearAll();
                 showMessageDialog(null, "Item has been added");
             }

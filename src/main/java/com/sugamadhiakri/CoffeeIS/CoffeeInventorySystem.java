@@ -13,7 +13,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
  *
  * @author sugam, samrat
  */
-public class NewJFrame extends javax.swing.JFrame {
+public class CoffeeInventorySystem extends javax.swing.JFrame {
 
     /**
      * Creates new form NewJFrame
@@ -21,24 +21,24 @@ public class NewJFrame extends javax.swing.JFrame {
     public static ArrayList<Coffee> items;
     
 
-    public NewJFrame(ArrayList<Coffee> items) {
-        NewJFrame.items = items;
+    public CoffeeInventorySystem(ArrayList<Coffee> items) {
+        CoffeeInventorySystem.items = items;
       
         initComponents();
     }
 
     public void adder(int modelNumber, String appName, String category, String recommendedBy, int price, int discount,boolean sugar) {
-        NewJFrame.items.add(new Coffee(modelNumber, appName, category, recommendedBy, price, discount,sugar));
+        CoffeeInventorySystem.items.add(new Coffee(modelNumber, appName, category, recommendedBy, price, discount,sugar));
     }
 
     public static void refreshTable() {
         DefaultTableModel model = new DefaultTableModel(0, 0);
-        NewJFrame.itemTable.setModel(model);
+        CoffeeInventorySystem.itemTable.setModel(model);
         model.setColumnIdentifiers(new String[]{
             "coffee number", "coffe name", "category", "recommened by", "discount", "price","added sugar"
         });
-        NewJFrame.itemTable.setEnabled(false);
-        NewJFrame.items.forEach((Coffee c) -> {
+        CoffeeInventorySystem.itemTable.setEnabled(false);
+        CoffeeInventorySystem.items.forEach((Coffee c) -> {
             int num = c.getModelNumber();
             String name = c.getAppName();
             String cat = c.getCategory();
@@ -305,9 +305,9 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        AddItem a = new AddItem(NewJFrame.items);
+        AddItem a = new AddItem(CoffeeInventorySystem.items);
         a.setVisible(true);
-        NewJFrame.items = a.items;
+        CoffeeInventorySystem.items = a.items;
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -334,12 +334,12 @@ public class NewJFrame extends javax.swing.JFrame {
         MergeSort.sortMyArray();
         try{
             int p = Integer.parseInt(searchPrice.getText());
-            int ret = BinarySearch.binarySearch(NewJFrame.items,p);
+            int ret = BinarySearch.binarySearch(CoffeeInventorySystem.items,p);
             if (ret == -1){
                 showMessageDialog(null, "sorry there is no coffee with price:"+p);
             }
             else{
-                Coffee coff = NewJFrame.items.get(ret);
+                Coffee coff = CoffeeInventorySystem.items.get(ret);
                 showMessageDialog(null, "\nItem number: "+coff.getModelNumber()+"\nCoffee name: "+coff.getAppName()+"\ntype: "+coff.getCategory()+"\n recommende by: "+coff.getRecommendedBy()+"\nprice: "+coff.getPrice()+"\ndiscount: "+coff.getDiscount());
             }
         }
@@ -383,7 +383,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private void searchTypesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTypesActionPerformed
         // TODO add your handling code here:
         String type = searchTypeBox.getSelectedItem().toString();
-        ArrayList<Coffee> get = SearchByType.searchByType(NewJFrame.items, type);
+        ArrayList<Coffee> get = SearchByType.searchByType(CoffeeInventorySystem.items, type);
         ArrayList<String> arr= new ArrayList<>();
         for (Coffee g:get){
             arr.add(g.getAppName()+" ");
@@ -409,20 +409,21 @@ public class NewJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CoffeeInventorySystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CoffeeInventorySystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CoffeeInventorySystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CoffeeInventorySystem.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             ArrayList<Coffee> items1 = new ArrayList<>();
-            NewJFrame a = new NewJFrame(items1);
+            CoffeeInventorySystem a = new CoffeeInventorySystem(items1);
             //a.adder(1, "himalayan coffee", "coffee beans", "matt D'Avella",5000,10);
             //a.adder(2, "ilam coffee", "coffee beans", "kp oli",1000,20);
             //a.adder(3, "african coffee", "grinded coffee ", "barak obama",10000,00);
