@@ -20,10 +20,10 @@ public class CoffeeInventorySystem extends javax.swing.JFrame {
      */
     public static ArrayList<Coffee> items;
     
-
+    boolean imported;
     public CoffeeInventorySystem(ArrayList<Coffee> items) {
         CoffeeInventorySystem.items = items;
-      
+        this.imported = false;
         initComponents();
     }
 
@@ -324,9 +324,17 @@ public class CoffeeInventorySystem extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
-        forCsv.addFromCsv();
-        refreshTable();
-        showMessageDialog(null, "Imported item.csv");
+        
+        if (this.imported== false){
+            forCsv.addFromCsv();
+             this.imported = true;
+        refreshTable();            
+        }
+        else{
+            showMessageDialog(null, "Data already imported");
+        }
+
+        
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

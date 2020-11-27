@@ -43,4 +43,17 @@
                 <exec.executable>java</exec.executable>
             </properties>
         </action>
+        <action>
+            <actionName>build</actionName>
+            <preAction>build-with-dependencies</preAction>
+            <packagings>
+                <packaging>*</packaging>
+            </packagings>
+            <goals>
+                <goal>install</goal>
+            </goals>
+            <properties>
+                <Env.JAVA_HOME>/usr/lib/jvm/java-15-openjdk-amd64</Env.JAVA_HOME>
+            </properties>
+        </action>
     </actions>
